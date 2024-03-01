@@ -29,3 +29,15 @@ class Product(models.Model):
     def available(self):
         # checks whether the product is currently available
         return timezone.now() >= self.start_sales
+
+
+class Membership(models.Model):
+    # model Membership
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE)  # foreign key for user model
+    product = models.ForeignKey(Product,
+                                on_delete=models.CASCADE)  # foreign key for product model
+    access_granted = models.BooleanField(default=False)  # indicates whether the user has access to the product
+
+    def __str__(self):
+        return f"{self.user.username} - {self.product.name}"
