@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.utils import timezone
 
 
@@ -48,4 +48,4 @@ class Membership(models.Model):
     access_granted = models.BooleanField(default=False)  # indicates whether the user has access to the product
 
     def __str__(self):
-        return f"{self.user.username} - {self.product.name}"
+        return f"{self.user.username} - {self.product.title}"
