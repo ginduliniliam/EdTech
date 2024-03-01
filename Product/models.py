@@ -22,6 +22,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)  # Product price
     author = models.ForeignKey(Author,
                                on_delete=models.CASCADE)  # Product author
+    min_users = models.IntegerField(default=0)  # min users in Product
+    max_users = models.IntegerField(default=20)  # max users in Product
 
     def __str__(self):
         return self.title
@@ -29,6 +31,17 @@ class Product(models.Model):
     def available(self):
         # checks whether the product is currently available
         return timezone.now() >= self.start_sales
+
+
+class MyGroup(models.Model):
+    # model Group
+    product = models.ForeignKey(Product,
+                                on_delete=models.CASCADE)  # foreign key for product model
+    title = models.CharField(max_length=100)  # title Group
+    students = models.ManyToManyField(User)  #
+
+    def __str__(self):
+        return self.title
 
 
 class Lesson(models.Model):
