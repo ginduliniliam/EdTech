@@ -31,6 +31,14 @@ class Product(models.Model):
         return timezone.now() >= self.start_sales
 
 
+class Lesson(models.Model):
+    # model lesson
+    product = models.ForeignKey(Product,
+                                on_delete=models.CASCADE)  # foreign key for product model
+    title = models.CharField(max_length=100)  # Lesson title
+    video_link = models.URLField()  # Video link in Lesson
+
+
 class Membership(models.Model):
     # model Membership
     user = models.ForeignKey(User,
